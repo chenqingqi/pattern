@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="UTF-8">
+	<title>中介者-处理多个对象之间的交互</title>
+	<script>
+		
+		/**
+	     * 方法中介(MVC)
+	     */
+	    function Mediator(view,model)
+	    {
+	        /**
+	         * 初始化
+	         */
+	        function init()
+	        {
+	            view.setTitle(model.title);
+	        }
+	
+	        init();
+	    }
+	
+	
+	    /**
+	     * 视图
+	     */
+	    function View()
+	    {
+	        /**
+	         * 修改标题
+	         */
+	        this.setTitle = function(data)
+	        {
+	            console.log(data)
+	        }
+	    }
+	
+	
+	    /**
+	     * 数据
+	     */
+	    function Model()
+	    {
+	
+	        /**
+	         * 标题数据
+	         */
+	        this.title = '暂无标题';
+	
+	    }
+	
+	
+	
+	    var mediator = new Mediator(new View(),new Model());
+	    
+	</script>
+</html>

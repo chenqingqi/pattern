@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="UTF-8">
+	<title>反射-增加程序的灵活性,避免将程序写死到代码里</title>
+	<script>
+		
+		/**
+	     * 获取window的属性和方法
+	     */
+	    for(var i in window)
+	    {
+	        console.log(i+':'+window[i])
+	    }
+	
+	
+	   /////////////////////////////////////////////////////////////////////
+	
+	
+	    /**
+	     * 根据键盘值，执行相应方法
+	     */
+	    window.addEventListener('keydown',function(e)
+	    {
+	        keyEvent[e.keyCode]()
+	    })
+	
+	
+	    /**
+	     * 键盘事件
+	     */
+	    var keyEvent = {
+	
+	        65:function()
+	        {
+	            alert('A')
+	        },
+	
+	        83:function()
+	        {
+	            alert('S')
+	        },
+	
+	        68:function()
+	        {
+	            alert('D')
+	        }
+	    }
+	
+	
+	
+	    /**
+	     * 根据数据，更新元素样式
+	     */
+	    function style(data)
+	    {
+	        for(var i in data)
+	        {
+	            document.body.style[i] = data[i];
+	        }
+	    }
+	
+	    style({'background-color':'red'});
+	
+	
+	
+	   /////////////////////////////////////////////////////////////////////
+	
+	
+	
+	    /**
+	     * switch耦合
+	     */
+	    switch(num)
+	    {
+	        case 0 :
+	            console.log('跑步')
+	            break;
+	
+	        case 1 :
+	            console.log('跳跃')
+	            break;
+	
+	        case 2 :
+	            console.log('睡觉')
+	            break;
+	    }
+	
+	
+	
+	    /**
+	     * 反射解耦
+	     */
+	    function people()
+	    {
+	        function run()
+	        {
+	            console.log('跑步')
+	        }
+	
+	        function jump()
+	        {
+	            console.log('跳跃')
+	        }
+	
+	        function sleep()
+	        {
+	            console.log('睡觉')
+	        }
+	
+	        return{
+	
+	            0:run,
+	            1:jump,
+	            2:sleep
+	        }
+	    }
+	
+	
+	    new people()[value]
+	    
+	    
+	</script>
+</html>

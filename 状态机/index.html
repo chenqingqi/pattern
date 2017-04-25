@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="UTF-8">
+	<title>状态机-不同状态下的相同操作</title>
+	<script>
+		
+		/**
+	     * 灯
+	     */
+	    function Light()
+	    {
+	
+	        var _state = new StateOFF();
+	
+	        /**
+	         * 更改状态
+	         */
+	        function state(v)
+	        {
+	            _state = v;
+	        }
+	
+	
+	        /**
+	         * 开
+	         */
+	        function open()
+	        {
+	            _state.open(this)
+	        }
+	
+	
+	        /**
+	         * 关
+	         */
+	        function close()
+	        {
+	            _state.close(this)
+	        }
+	
+	
+	        return{
+	
+	            state:state,
+	            open:open,
+	            close:close
+	        }
+	    }
+	
+	
+	
+	    /**
+	     * 灯开着的状态
+	     */
+	    function StateON()
+	    {
+	
+	        function open(light)
+	        {
+	            console.log('本次操作被忽略，灯处于打开状态')
+	        }
+	
+	        function close(light)
+	        {
+	            light.state(new StateOFF())
+	            console.log('关灯成功')
+	        }
+	
+	        return{
+	
+	            open:open,
+	            close:close
+	        }
+	    }
+	
+	
+	
+	    /**
+	     * 灯关着的状态
+	     */
+	    function StateOFF()
+	    {
+	
+	        function open(light)
+	        {
+	            light.state(new StateON())
+	            console.log('开灯成功')
+	        }
+	
+	        function close(light)
+	        {
+	            console.log('本次操作被忽略，灯处于关闭状态')
+	        }
+	
+	        return{
+	
+	            open:open,
+	            close:close
+	        }
+	    }
+	
+	
+	
+	    /**
+	     * 测试应用
+	     */
+	    var light = new Light();
+	
+	    /**
+	     * 侦听用户交互
+	     */
+	    window.addEventListener('click',function(e)
+	    {
+	
+	        if(e.target.id == 'on')
+	        {
+	            light.open()
+	        }
+	        else
+	        {
+	            light.close()
+	        }
+	    })
+	    
+	</script>
+</html>

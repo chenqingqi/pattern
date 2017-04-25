@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="UTF-8">
+	<title>闭包-闭包是封装对象的一种方式，闭包将数据和代码一起封装起来，当作一个对象被调用，从面向对象的角度来讲，闭包等价于类的封装。对于闭包的调用，等价于类的实例的生成</title>
+	<script>
+		
+		function Page()
+	    {
+	
+	        //计数
+	        var _count = 0;
+	
+	
+	        /**
+	         * 设置计数
+	         * @n:int
+	         */
+	        function count(n)
+	        {
+	            _count = _count+n;
+	            return _count;
+	        }
+	
+	
+	        /**
+	         * 公开接口
+	         */
+	        return{
+	
+	            count:count
+	        }
+	    }
+	
+	
+	    /**
+	     * 闭包方式
+	     */
+	    var pageA = Page()
+	
+	    console.log(pageA.count(1))   //输出：1
+	
+	    console.log(pageA.count(1))   //输出：2
+	
+	
+	    /**
+	     * new方式
+	     */
+	    var pageB = new Page()
+	
+	    console.log(pageB.count(1))   //输出：1
+	
+	    console.log(pageB.count(1))   //输出：2
+	    
+	    
+	</script>
+</html>

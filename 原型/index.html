@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="UTF-8">
+	<title>原型-实例可以被克隆（Javascript的继承就是基于原型的）</title>
+	<script>
+		
+		 function People()
+	    {
+	
+	        /**
+	         * 钱
+	         */
+	        var money = 0;
+	
+	
+	        /**
+	         * 克隆
+	         */
+	        function clone()
+	        {
+	            function Copy(){}
+	            Copy.prototype = this;
+	            return new Copy();
+	        }
+	
+	        return{
+	
+	            money:money,
+	            clone:clone
+	        }
+	
+	    }
+	
+	    var xiaoming = new People();
+	
+	    xiaoming.money = 1000;
+	
+	
+	    var zhansan = xiaoming.clone();
+	
+	    console.log(zhansan.money) //输出:'1000'
+		    
+	</script>
+</html>

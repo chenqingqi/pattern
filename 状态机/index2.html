@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="UTF-8">
+	<title>状态机-不同状态下的相同操作</title>
+	<script>
+		
+		/**
+	     * 游戏人物
+	     */
+	    function Person()
+	    {
+	
+	        /**
+	         * 默认状态
+	         */
+	        var _state = new StateStand();
+	
+	
+	        /**
+	         * 切换状态
+	         */
+	        function state(v)
+	        {
+	            _state = v;
+	        }
+	
+	
+	        /**
+	         * 上
+	         */
+	        function top()
+	        {
+	            _state.top(this)
+	        }
+	
+	
+	        /**
+	         * 下
+	         */
+	        function bottom()
+	        {
+	            _state.bottom(this)
+	        }
+	
+	
+	        return{
+	
+	            state:state,
+	            top:top,
+	            bottom:bottom
+	        }
+	
+	    }
+	
+	
+	
+	    /**
+	     * 站立状态
+	     */
+	    function StateStand()
+	    {
+	
+	        /**
+	         * 上
+	         */
+	        function top(p)
+	        {
+	            console.log('切换到跳跃状态');
+	            p.state(new StateJump())
+	        }
+	
+	
+	        /**
+	         * 下
+	         */
+	        function bottom(p)
+	        {
+	            console.log('切换到下蹲状态')
+	            p.state(new StateSquat())
+	        }
+	
+	        return{
+	
+	            top:top,
+	            bottom:bottom
+	        }
+	    }
+	
+	
+	    /**
+	     * 跳跃
+	     */
+	    function StateJump()
+	    {
+	        /**
+	         * 上
+	         */
+	        function top(p)
+	        {
+	            console.log('此操作忽略，跳跃中不能再次跳跃')
+	        }
+	
+	        /**
+	         * 下
+	         */
+	        function bottom(p)
+	        {
+	            console.log('切换到下斩状态')
+	            p.state(new StateBehead())
+	        }
+	
+	        return{
+	
+	            top:top,
+	            bottom:bottom
+	        }
+	    }
+	
+	
+	    /**
+	     * 下斩
+	     */
+	    function StateBehead()
+	    {
+	        /**
+	         * 上
+	         */
+	        function top(p)
+	        {
+	            console.log('切换到站立状态')
+	            p.state(new StateStand())
+	        }
+	
+	        /**
+	         * 下
+	         */
+	        function bottom()
+	        {
+	            console.log('此操作忽略，下斩中不能再次下斩')
+	        }
+	
+	        return{
+	
+	            top:top,
+	            bottom:bottom
+	        }
+	    }
+	
+	
+	    /**
+	     * 下蹲
+	     */
+	    function StateSquat()
+	    {
+	        /**
+	         * 上
+	         */
+	        function top(p)
+	        {
+	            console.log('请按下键释放')
+	        }
+	
+	        /**
+	         * 下
+	         */
+	        function bottom(p)
+	        {
+	            console.log('切换到站立状态')
+	            p.state(new StateStand())
+	        }
+	
+	        return{
+	
+	            top:top,
+	            bottom:bottom
+	        }
+	    }
+	
+	
+	
+	
+	
+	    /**
+	     * 游戏状态机应用
+	     */
+	    var person = new Person();
+	
+	
+	    window.addEventListener('keydown',function(e)
+	    {
+	
+	        if(e.keyCode == '38')
+	        {
+	            person.top();
+	        }
+	
+	        if(e.keyCode == '40')
+	        {
+	            person.bottom();
+	        }
+	    })
+	    
+	</script>
+</html>
